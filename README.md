@@ -13,6 +13,10 @@ Projede olacaklar;
 * Menüden arama yapılabilecek.
 * Her personelin aldığı sipariş farklı tutulacak. (Ayın elemanı için olabilir.)
 * Personel ekleyip çıkartabilecek.
+* Gün sonu ve ay z raporları alınabilecek.
+
+
+
 
 
 ```
