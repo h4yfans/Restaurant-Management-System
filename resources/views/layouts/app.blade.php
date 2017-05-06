@@ -64,7 +64,7 @@
                 <br/>
 
                 <!-- sidebar menu -->
-            @include('admin.partials._sidebar')
+            @include('admin.includes._sidebar')
             <!-- /sidebar menu -->
 
             </div>
@@ -120,7 +120,6 @@
     </div>
 </div>
 
-@yield('footer_js')
 <!-- /compose -->
 
 <!-- jQuery -->
@@ -137,5 +136,8 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+
+@yield('footer_js')
+
 </body>
 </html>

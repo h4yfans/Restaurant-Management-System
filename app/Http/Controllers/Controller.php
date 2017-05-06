@@ -10,4 +10,17 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected $viewData = [];
+    protected $pagetitle = '';
+
+    public function viewData()
+    {
+        $data = [
+            'pagetitle'    => $this->pagetitle,
+            'submitButton' => 'Kaydet'
+        ];
+
+        return array_merge($data, $this->viewData);
+    }
 }

@@ -13,8 +13,11 @@
 
 Route::get('/', function () {
     return view('admin.index');
-});
+})->name('home');
+
+Route::get('/personel', function(){
+    return view('admin.personal.list');
+})->name('personel');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
