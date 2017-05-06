@@ -2,7 +2,15 @@
 
 @section('content')
     <div class="x_panel">
-
+        <div class="pull-right">
+            <h2></h2>
+            <div class="right">
+                <a href="{{route('personal.create')}}" class="btn btn-success btn-icon icon-left" id="add-note">
+                    <i class="fa fa-user-plus"></i>
+                    Yeni Personel Ekle
+                </a>
+            </div>
+        </div>
         <div class="x_title">
             <h2>{{-- TODO VİEW DATA --}}
                 <small>Users</small>
@@ -36,10 +44,10 @@
                     <td>2011/04/25</td>
                     <td>2011/04/25</td>
                     <td>$320,800</td>
-                    <td><a href="" class="btn btn-info btn-sm btn-icon icon-left">
+                    <td><a href="{{route('personal.edit', 1)}}" class="btn btn-info btn-sm btn-icon icon-left">
                             <i class="fa fa-edit"></i>
                             Düzenle</a>
-                        <a href="" class="btn btn-danger btn-sm btn-icon icon-left">
+                        <a href="{{route('personal.destroy',1)}}" class="btn btn-danger btn-sm btn-icon icon-left">
                             <i class="fa fa-remove"></i>
                             Sil</a></td>
                 </tr>

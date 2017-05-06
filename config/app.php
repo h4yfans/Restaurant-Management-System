@@ -170,6 +170,8 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         AdamWathan\BootForms\BootFormsServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -229,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'BootForm' => AdamWathan\BootForms\Facades\BootForm::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 

@@ -10,14 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/', function () {
     return view('admin.index');
 })->name('home');
 
-Route::get('/personel', function(){
-    return view('admin.personal.list');
-})->name('personel');
 
-Auth::routes();
-
+Route::resource('personal', 'PersonalController');
