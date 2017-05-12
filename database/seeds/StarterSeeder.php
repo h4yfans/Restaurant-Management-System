@@ -15,13 +15,18 @@ class StarterSeeder extends Seeder
             'name' => 'Kaan Karaca',
             'email' => 'kaan94karaca@gmail.com',
             'password' => bcrypt('123123'),
+            'profession' => 'Yazılım',
+            'start_date' => \Carbon\Carbon::now(),
+            'home_phone' => '12341234',
+            'mobile_phone' => '12341234',
+            'address' => 'Sultan Murat'
         ]);
 
         $superAdmin = \App\Models\Role::find(1);
         $employee = \App\Models\Role::find(2);
         $kaan->attachRole($superAdmin);
 
-        $users = factory(\App\Models\User::class,10)->create();
+        $users = factory(\App\Models\User::class,40)->create();
 
 
         foreach ($users as $user){

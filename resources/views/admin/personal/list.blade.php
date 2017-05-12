@@ -12,9 +12,7 @@
             </div>
         </div>
         <div class="x_title">
-            <h2>{{-- TODO VİEW DATA --}}
-                <small>Users</small>
-            </h2>
+            <h2>{{$pageTitle}}</h2>
 
             <div class="clearfix"></div>
         </div>
@@ -22,50 +20,37 @@
             <table id="datatable-buttons" class="table table-striped table-bordered table-responsive">
                 <thead>
                 <tr>
-                    <th>İsim</th>
-                    <th>Soyisim</th>
+                    <th>İsim Soyisim</th>
                     <th>Ünvan</th>
                     <th>Başlangıç Tarihi</th>
                     <th>Ev No</th>
                     <th>Cep No</th>
                     <th>Adres</th>
                     <th>Aksiyonlar</th>
-
                 </tr>
                 </thead>
 
 
-                <tbody>
-                <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                    <td><a href="{{route('personal.edit', 1)}}" class="btn btn-info btn-sm btn-icon icon-left">
-                            <i class="fa fa-edit"></i>
-                            Düzenle</a>
-                        <a href="{{route('personal.destroy',1)}}" class="btn btn-danger btn-sm btn-icon icon-left">
-                            <i class="fa fa-remove"></i>
-                            Sil</a></td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td>2011/07/25</td>
-                    <td>$170,750</td>
-                    <td><a href="" class="btn btn-info btn-sm btn-icon icon-left">
-                            <i class="fa fa-edit"></i>
-                            Düzenle</a>
-                        <a href="" class="btn btn-danger btn-sm btn-icon icon-left">
-                            <i class="fa fa-remove"></i>
-                            Sil</a></td>
-                </tr>
+                <tbody class="row">
+                @foreach($personals as $personal)
+                    <tr>
+                        <td>{{ $personal->name }}</td>
+                        <td>{{ $personal->profession }}</td>
+                        <td>{{ $personal->start_date }}</td>
+                        <td>{{ $personal->home_phone }}</td>
+                        <td>{{ $personal->mobile_phone }}</td>
+                        <td>{{ str_limit($personal->address,20) }}</td>
+                        <td><a href="{{route('personal.edit', $personal->id)}}"
+                               class="btn btn-info btn-sm">
+                                <i class="fa fa-edit"></i>
+                                Düzenle</a>
+                            <a href="{{route('personal.destroy', $personal->id)}}"
+                               class="btn btn-danger btn-sm destroyButton" data-destroypersonal="{{$personal->name}}">
+                                <i class="fa fa-remove"></i>
+                                Sil</a></td>
+                    </tr>
+                @endforeach
+
                 </tbody>
             </table>
         </div>
@@ -77,6 +62,11 @@
     <link rel="stylesheet" href="{{asset('css/datatables/buttons.bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/datatables/fixedHeader.bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/datatables/fixedHeader.bootstrap.min.css')}}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="{{asset('css/pnotify.css')}}">
+    <link rel="stylesheet" href="{{asset('css/pnotify.buttons.css')}}">
+    <link rel="stylesheet" href="{{asset('css/pnotify.nonblock.css')}}">
 @endsection
 
 @section('footer_js')
@@ -89,16 +79,67 @@
     <script src="{{asset('js/datatables/dataTables.fixedHeader.min.js')}}"></script>
     <script src="{{asset('js/datatables/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('js/datatables/responsive.bootstrap.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+    <script src="{{asset('js/pnotify.js')}}"></script>
+    <script src="{{asset('js/pnotify.buttons.js')}}"></script>
+    <script src="{{asset('js/pnotify.nonblock.js')}}"></script>
+
 
 
     <script>
         $(document).ready(function () {
-            console.log('test')
             $('#datatable-buttons').DataTable({
                 responsive: true,
                 select: true,
                 order: [],
             });
         });
+
+        $('.destroyButton').on('click', function (e) {
+            e.preventDefault();
+            var ajaxurl = $(this).attr("href");
+            var parentline = $(this).parents("tr");
+
+
+            BootstrapDialog.confirm({
+                title: 'Silinecek Personal: ' + $(this).data('destroypersonal'),
+                message: 'Seçmiş olduğunuz öğeyi silmek istediğinize emin misiniz?',
+                type: BootstrapDialog.TYPE_DANGER, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+                // closable: true, // <-- Default value is false
+                // draggable: true, // <-- Default value is false
+                btnOKClass: 'btn-warning', // <-- If you didn't specify it, dialog type will be used,
+                btnCancelLabel: 'İptal', // <-- Default value is 'Cancel',
+                btnOKLabel: 'Onay', // <-- Default value is 'OK',
+
+                callback: function (result) {
+
+                    if (result) {
+                        $.ajax({
+                            url: ajaxurl,
+                            data: {"_token": '{{csrf_token()}}', '_method': 'delete'},
+                            type: 'POST',
+                            success: function (result) {
+                                if (result.is_action_successful === 1) {
+                                    parentline.fadeOut();
+                                    new PNotify({
+                                        title: 'Başarılı',
+                                        text: 'Personel başarıyla silindi',
+                                        type: 'success',
+                                        styling: 'bootstrap3'
+                                    });
+                                } else {
+                                    console.log('silinmedi')
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+            return false;
+        });
+
     </script>
+
+
 @endsection

@@ -19,6 +19,11 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
+        'profession' => $faker->sentence(1),
+        'start_date' => $faker->dateTimeBetween(\Carbon\Carbon::now()->year('-4'), \Carbon\Carbon::now()),
+        'home_phone' => $faker->phoneNumber,
+        'mobile_phone' => $faker->phoneNumber,
+        'address' => $faker->address,
         'remember_token' => str_random(10),
     ];
 });
