@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PersonalRequest;
 use App\Models\Dessert;
-use App\Models\Salad;
+use App\Models\Table;
 use Illuminate\Http\Request;
 
 class TableController extends Controller
@@ -16,10 +15,10 @@ class TableController extends Controller
      */
     public function index()
     {
-        $this->viewData['pageTitle'] = 'Salata Yönetimi';
-        $salads                      = Salad::all();
+        $this->viewData['pageTitle'] = 'Masa Yönetimi';
+        $tables                      = Table::all();
 
-        return view('admin.salad.list', compact('salads'))->with($this->viewData());
+        return view('admin.table.list', compact('tables'))->with($this->viewData());
     }
 
     /**
@@ -29,10 +28,10 @@ class TableController extends Controller
      */
     public function create()
     {
-        $this->viewData['pageTitle'] = 'Salata Ekle';
+        $this->viewData['pageTitle'] = 'Masa Ekle';
         $this->viewData['item']      = null;
 
-        return view('admin.salad.create')->with($this->viewData());
+        return view('admin.table.create')->with($this->viewData());
     }
 
     /**
@@ -45,16 +44,10 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'name'  => 'required',
-            'price' => 'required|integer'
-        ];
 
-        $this->validate($request, $rules);
+        $salad = Table::create();
 
-        $salad = Salad::create($request->all());
-
-        return redirect()->route('salad.index');
+        return redirect()->route('table.index');
     }
 
     /**
@@ -72,43 +65,19 @@ class TableController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param Salad $salad
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @internal param Dessert $dessert
-     *
-     * @internal param Drink $drink
-     *
-     * @internal param Food $food
      */
-    public function edit(Salad $salad)
+    public function edit()
     {
-        $this->viewData['pageTitle'] = 'Salata Düzenle';
-        $this->viewData['item']      = $salad;
 
-        return view('admin.salad.edit')->with($this->viewData());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Dessert $dessert
-     * @param PersonalRequest|Request $request
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function update(Salad $salad, Request $request)
+    public function update()
     {
-        $rules = [
-            'name'  => 'required',
-            'price' => 'required|integer'
-        ];
-        $this->validate($request, $rules);
 
-        $salad->update($request->all());
-
-        return redirect()->back();
     }
 
     /**
@@ -122,10 +91,10 @@ class TableController extends Controller
      *
      * @internal param Food $food
      */
-    public function destroy(Request $request, Salad $salad)
+    public function destroy(Request $request, Table $table)
     {
-        $salad->delete();
-        $successMessage = 'Salata başarıyla silindi';
+        $table->delete();
+        $successMessage = 'Masa başarıyla silindi';
 
         if ($request->ajax()) {
             return ['is_action_successful' => 1, 'message' => $successMessage];

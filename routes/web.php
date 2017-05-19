@@ -22,3 +22,4 @@ Route::resource('food', 'FoodController');
 Route::resource('drink', 'DrinkController');
 Route::resource('dessert', 'DessertController');
 Route::resource('salad', 'SaladController');
+Route::resource('table', 'TableController');

@@ -3,6 +3,8 @@
         <h3>Genel </h3>
         <ul class="nav side-menu">
             <li class="{{App\Helpers\Helper::classActiveRouteName('home')}}"><a href="{{route('home')}}"><i class="fa fa-home"></i> Anasayfa</a></li>
+            <li class="{{App\Helpers\Helper::classActiveRouteName(['table.index', 'table.edit', 'table.create'])}}"><a
+                        href="{{route('table.index')}}"><i class="fa fa-table"></i> Masa Yönetimi</a></li>
             <li class="{{App\Helpers\Helper::classActiveRouteName(['personel.index', 'personal.edit', 'personal.create'])}}"><a href="{{route('personal.index')}}"><i class="fa fa-user"></i> Personel Yönetimi</a></li>
             <li><a><i class="fa fa-money"></i> Finans Yönetimi</a></li>
         </ul>
