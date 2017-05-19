@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonalRequest;
+use App\Models\Drink;
 use App\Models\Food;
-use App\Models\Role;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class FoodController extends Controller
+class DrinkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,10 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $this->viewData['pageTitle'] = 'Yiyecek Yönetimi';
-        $foods = Food::all();
+        $this->viewData['pageTitle'] = 'İçeçek Yönetimi';
+        $drinks = Drink::all();
 
-        return view('admin.food.list', compact('foods'))->with($this->viewData());
+        return view('admin.drink.list', compact('drinks'))->with($this->viewData());
     }
 
     /**
@@ -30,10 +29,10 @@ class FoodController extends Controller
      */
     public function create()
     {
-        $this->viewData['pageTitle'] = 'Yiyecek Ekle';
+        $this->viewData['pageTitle'] = 'İçeçek Ekle';
         $this->viewData['item']      = null;
 
-        return view('admin.food.create')->with($this->viewData());
+        return view('admin.drink.create')->with($this->viewData());
     }
 
     /**
@@ -47,15 +46,15 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         $rules = [
-          'name' => 'required',
-          'price' => 'required|integer'
+            'name' => 'required',
+            'price' => 'required|integer'
         ];
 
         $this->validate($request, $rules);
 
-        $food = Food::create($request->all());
+        $drink = Drink::create($request->all());
 
-        return redirect()->route('food.index');
+        return redirect()->route('drink.index');
     }
 
     /**
@@ -74,37 +73,28 @@ class FoodController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Food $food
+     * @param Drink $drink
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     *
-     * @internal param PersonalRequest $request
-     * @internal param User $user
-     *
-     * @internal param int $id
+     * @internal param Food $food
      */
-    public function edit(Food $food)
+    public function edit(Drink $drink)
     {
-        $this->viewData['pageTitle'] = 'Personel Düzenle';
-        $this->viewData['item']      = $food;
+        $this->viewData['pageTitle'] = 'İçeçek Düzenle';
+        $this->viewData['item']      = $drink;
 
-        return view('admin.food.edit')->with($this->viewData());
+        return view('admin.drink.edit')->with($this->viewData());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Food $food
+     * @param Drink $drink
      * @param PersonalRequest|Request $request
      *
      * @return \Illuminate\Http\Response
-     * @internal param $id
-     *
-     * @internal param User $user
-     *
-     * @internal param int $id
      */
-    public function update(Food $food, Request $request)
+    public function update(Drink $drink, Request $request)
     {
         $rules = [
             'name' => 'required',
@@ -112,7 +102,7 @@ class FoodController extends Controller
         ];
         $this->validate($request, $rules);
 
-        $food->update($request->all());
+        $drink->update($request->all());
 
         return redirect()->back();
     }
@@ -121,19 +111,14 @@ class FoodController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Request $request
-     * @param Food $food
+     * @param Drink $drink
      *
      * @return array
-     * @throws \Exception
-     * @internal param User $personal
-     *
-     * @internal param User $user
-     *
-     * @internal param int $id
+     * @internal param Food $food
      */
-    public function destroy(Request $request, Food $food)
+    public function destroy(Request $request, Drink $drink)
     {
-        $food->delete();
+        $drink->delete();
         $successMessage = 'İçeçek başarıyla silindi';
 
         if ($request->ajax()) {

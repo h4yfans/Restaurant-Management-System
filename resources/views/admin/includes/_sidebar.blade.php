@@ -11,7 +11,7 @@
         <h3>Menüler</h3>
         <ul class="nav side-menu">
             <li class="{{App\Helpers\Helper::classActiveRouteName(['food.index', 'food.edit', 'food.create'])}}"><a href="{{route('food.index')}}"><i class="fa fa-cutlery"></i> Yiyecekler</a></li>
-            <li><a><i class="fa fa-glass"></i> İçeçekler</a></li>
+            <li class="{{App\Helpers\Helper::classActiveRouteName(['drink.index', 'drink.edit', 'drink.create'])}}"><a href="{{route('drink.index')}}"><i class="fa fa-glass"></i> İçecekler</a></li>
             <li><a><i class="fa fa-lemon-o"></i> Tatlılar</a></li>
             <li><a><i class="fa fa-pagelines"></i> Salatalar</a></li>
         </ul>
