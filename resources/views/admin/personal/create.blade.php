@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('admin.personal.partials.form')
+    @include('admin.personal.partials.form', ['pageTitle' => $pageTitle])
 @endsection

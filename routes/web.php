@@ -18,3 +18,4 @@ Route::get('/', function () {
 
 
 Route::resource('personal', 'PersonalController');
+Route::resource('food', 'FoodController');

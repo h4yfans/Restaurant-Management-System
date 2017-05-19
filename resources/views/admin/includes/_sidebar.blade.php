@@ -3,14 +3,14 @@
         <h3>Genel </h3>
         <ul class="nav side-menu">
             <li class="{{App\Helpers\Helper::classActiveRouteName('home')}}"><a href="{{route('home')}}"><i class="fa fa-home"></i> Anasayfa</a></li>
-            <li class="{{App\Helpers\Helper::classActiveRouteName('personel')}}"><a href="{{route('personal.index')}}"><i class="fa fa-user"></i> Personel Yönetimi</a></li>
+            <li class="{{App\Helpers\Helper::classActiveRouteName(['personel.index', 'personal.edit', 'personal.create'])}}"><a href="{{route('personal.index')}}"><i class="fa fa-user"></i> Personel Yönetimi</a></li>
             <li><a><i class="fa fa-money"></i> Finans Yönetimi</a></li>
         </ul>
     </div>
     <div class="menu_section">
         <h3>Menüler</h3>
         <ul class="nav side-menu">
-            <li><a><i class="fa fa-cutlery"></i> Yiyecekler</a></li>
+            <li class="{{App\Helpers\Helper::classActiveRouteName(['food.index', 'food.edit', 'food.create'])}}"><a href="{{route('food.index')}}"><i class="fa fa-cutlery"></i> Yiyecekler</a></li>
             <li><a><i class="fa fa-glass"></i> İçeçekler</a></li>
             <li><a><i class="fa fa-lemon-o"></i> Tatlılar</a></li>
             <li><a><i class="fa fa-pagelines"></i> Salatalar</a></li>
@@ -22,7 +22,6 @@
             <li><a><i class="fa  fa-line-chart"></i> Dönemsel Raporlar</a></li>
         </ul>
     </div>
-
 </div>
 <!-- /menu footer buttons -->
 <div class="sidebar-footer hidden-small">
