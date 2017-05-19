@@ -13,7 +13,7 @@
             <li class="{{App\Helpers\Helper::classActiveRouteName(['food.index', 'food.edit', 'food.create'])}}"><a href="{{route('food.index')}}"><i class="fa fa-cutlery"></i> Yiyecekler</a></li>
             <li class="{{App\Helpers\Helper::classActiveRouteName(['drink.index', 'drink.edit', 'drink.create'])}}"><a href="{{route('drink.index')}}"><i class="fa fa-glass"></i> İçecekler</a></li>
             <li class="{{App\Helpers\Helper::classActiveRouteName(['dessert.index', 'dessert.edit', 'dessert.create'])}}"><a href="{{route('dessert.index')}}"><i class="fa fa-lemon-o"></i> Tatlılar</a></li>
-            <li><a><i class="fa fa-pagelines"></i> Salatalar</a></li>
+            <li class="{{App\Helpers\Helper::classActiveRouteName(['salad.index', 'salad.edit', 'salad.create'])}}"><a href="{{route('salad.index')}}"><i class="fa fa-pagelines"></i> Tatlılar</a></li>
         </ul>
     </div>
     <div class="menu_section">
